@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Built-By: lenovo
+Build-Jdk: 12.0.2
+Implementation-Title: 360Hotel
+Implementation-Version: 0.0.1-SNAPSHOT
+Implementation-Vendor-Id: 360Hotel
+Implementation-Vendor: Pivotal Software, Inc.
+Implementation-URL: http://projects.spring.io/spring-boot/360Hotel/
+Created-By: Maven Integration for Eclipse
+
