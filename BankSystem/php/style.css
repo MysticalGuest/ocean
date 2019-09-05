@@ -1,0 +1,38 @@
+.North{
+	height:100%;
+	width: 100%;
+	background-color: #262D35;
+}
+.font1{
+	padding-top: 25px;
+	font-family: YouYuan, helvetica, sans-serif;
+	font-size: 40px;
+	color: white;
+	float: left;
+}
+.font2{
+	padding-top: 18px;
+	font-family: YouYuan, helvetica, sans-serif;
+	font-size: 30px;
+	color: white;
+	float: right;
+}
+.heading_img1 img{
+	margin-left: 20px;
+	margin-right: 20px;
+    margin-top: 20px;;
+	display: inline;
+	width: 60px;
+	height: 60px;
+	float: left;
+}
+.heading_img2 img{
+	border-radius: 60px;
+	margin-left: 20px;
+	margin-right: 20px;
+    margin-top: 13px;;
+	display: inline;
+	width: 30px;
+	height: 30px;
+	float: right;
+}
