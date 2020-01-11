@@ -28,5 +28,15 @@ public class ExpenseServiceImpl implements IExpenseService {
 	public int updatePrice(Expense expense) {
 		return expenseDao.updatePrice(expense);
 	}
+	
+	@Override
+	public int getHourRoom() {
+		return expenseDao.getHourRoom();
+	}
+	
+	@Override
+	public int updateHourRoomPrice(Expense expense) {
+		return expenseDao.updateHourRoomPrice(expense);
+	}
 
 }

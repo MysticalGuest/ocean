@@ -33,7 +33,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					尊品360宾馆服务平台
 				</font>
 			</div>
-				<h1>${thisadministrator.aName}正在运行平台！比公有云更多的，是精益求精的360°服务</h1>
+				<h1>${thisadministrator.aName}正在运行平台！比标准服务更多的，是精益求精的360°服务</h1>
 				<p>千锤百炼打造面向顾客的全程服务</p>
 			</div>
 			<ul class="index-tserver">

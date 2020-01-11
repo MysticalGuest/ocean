@@ -11,5 +11,9 @@ public interface IExpenseService {
 	List<Expense> getAllKinds();
 	
 	int updatePrice(Expense expense);
+	
+	int getHourRoom();
+	
+	int updateHourRoomPrice(Expense expense);
 
 }

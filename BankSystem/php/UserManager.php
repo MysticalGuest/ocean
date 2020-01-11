@@ -53,7 +53,7 @@
 		<meta http-equiv="content-type" content="text/html" charset="utf-8">
 		<title>银行系统服务平台</title>
 		<link rel="shortcut icon" href="../img/fbadge.ico"  type="image/x-icon"/>
-		<link href="style.css" type="text/css" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../css/style.css">
 		<link rel="stylesheet" type="text/css" href="../easyui/themes/default/easyui.css">
 		<link rel="stylesheet" type="text/css" href="../easyui/themes/icon.css">
 		<link rel="stylesheet" type="text/css" href="../easyui/demo/demo.css">

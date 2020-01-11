@@ -12,7 +12,8 @@ import com.hotel.entity.Customer;
 
 @Mapper // 标记当前类为功能映射文件
 public interface CustomerDao {
-	@Insert("insert into customer (inTime,cName,roomNum,chargeAndDeposit) values (#{inTime},#{cName},#{roomNum},#{chargeAndDeposit})")
+	@Insert("insert into customer (inTime,cName,cardID,roomNum,chargeAndDeposit,paymentMethod) "
+			+ "values (#{inTime},#{cName},#{cardID},#{roomNum},#{chargeAndDeposit},#{paymentMethod})")
 	@Options(useGeneratedKeys = true, keyProperty = "inTime")
 	int insert(Customer customer);
 

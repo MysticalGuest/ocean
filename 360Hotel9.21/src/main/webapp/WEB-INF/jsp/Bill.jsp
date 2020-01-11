@@ -227,13 +227,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				//根据房间combogrid输出房价
 				var type=$("input[name='roomType']:checked").val();
 				var data=<%=session.getAttribute("apartmentList")%>;
-				// data= JSON.parse(dataROOM);
+				var hourRoomPrice=<%=request.getAttribute("hourRoomPrice")%>;
 				var price=0;
 				for(var i=0;i<arr.length; i++){
 					for(var j=0;j<data.length; j++){
 						if(data[j].roomNum==arr[i]){
 							if(type=="hour"){
-								price+=50;
+								price+=hourRoomPrice;
 							}
 							else{
 								price+=data[j].price;
@@ -270,6 +270,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</script>
 		<script>
 			function dataSubmit(){
+				//身份证和支付方式
+				var paymentMethod=$("input[name='paymentMethod']:checked").val();
+				var cardID=document.getElementById("cardID").value;
+				if(typeof(paymentMethod) == "undefined"){
+					var paymentMethod="";
+				}
+				//发票
 				var cName = $("#cName").html();
 				var chargeAndDeposit = $("#chargeAndDeposit").html();
 				var roomNum = document.getElementById("forRoom").value;
@@ -282,7 +289,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				else{
 					$.ajax({
 							url: '../DistinguishedQuality360Hotel/front/Bill',
-							data:{"cName":cName,"chargeAndDeposit":chargeAndDeposit,"roomNum":roomNum},
+							data:{"paymentMethod":paymentMethod,"cardID":cardID,"cName":cName,"chargeAndDeposit":chargeAndDeposit,"roomNum":roomNum},
 							dataType:'json',//服务器返回json格式数据
 							type:'post',//HTTP请求类型
 							// timeout:10000,//超时时间设置为10秒；
@@ -304,6 +311,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						//将所填信息清空或还原
 						document.getElementById("cName").innerHTML='';
 						document.getElementById("chargeAndDeposit").innerHTML=200;
+						document.getElementById("cardID").value='';
+						$("input[name='paymentMethod']:checked").attr("checked",false);
 						//再将隐藏的按钮显示出来
 						document.getElementById('button').style.display='block';
 					}
@@ -326,6 +335,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</p>
 				</li>
 			</ul>
+			<div style="padding:3px;background-color: #656d73;border-radius: 5px;width: 20%;margin-left: 40%;">
+				<input id="cardID" name="cardID" type="text" placeholder='身份证号:'
+				style="height: 30px;border:1px solid #C4C4C4;border-radius: 5px;"></input>
+			</div>
+			<div style="color:white;padding:3px;background-color: #656d73;border-radius: 5px;
+				width: 20%;margin-left: 40%;margin-top: 2%;font-weight: 700;font-size: 20px;">
+				支付方式:<br>
+				现金<input name="paymentMethod" type="radio" value="现金" style="cursor:pointer;zoom:130%;">
+				微信<input name="paymentMethod" type="radio" value="微信" style="cursor:pointer;zoom:130%;">
+				支付宝<input name="paymentMethod" type="radio" value="支付宝" style="cursor:pointer;zoom:130%;"><br>
+				刷卡<input name="paymentMethod" type="radio" value="刷卡" style="cursor:pointer;zoom:130%;">
+				其他<input name="paymentMethod" type="radio" value="其他" style="cursor:pointer;zoom:130%;">
+			</div>
 		</div>
   </body>
 </html>

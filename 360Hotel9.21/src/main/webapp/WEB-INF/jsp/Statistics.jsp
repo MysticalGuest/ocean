@@ -19,7 +19,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		
 		<title>尊品360宾馆服务平台</title>
 		<link rel="shortcut icon" href="img/fire.ico"  type="image/x-icon"/>
-		<!-- <link rel="stylesheet" type="text/css" href="css/bootstrap.css"> -->
 		<link rel="stylesheet" href="css/chart.css">
 		<link rel="stylesheet" type="text/css" href="css/fontStyle.css"/>
 		<script src="easyui/jquery.min.js"></script>

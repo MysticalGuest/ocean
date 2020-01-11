@@ -130,32 +130,56 @@ public class AdministratorController {
 		return null;
 	}
 	
-	//前台管理界面
-	@RequestMapping(value="/FrontManagement",method = RequestMethod.GET,produces="text/plain;charset=UTF-8")
-	public String FrontManagement(HttpSession session) throws JsonProcessingException{
-		LOG.info("administrator/FrontManagement...");
+	//综合管理界面
+	@RequestMapping(value="/IntegratedManagement",method = RequestMethod.GET,produces="text/plain;charset=UTF-8")
+	public String FrontManagement(HttpServletRequest request,HttpSession session) throws JsonProcessingException{
+		LOG.info("administrator/IntegratedManagement...");
 		//front表格数据
 		List<Administrator> admList = administratorServiceimpl.getAllAdministrator();
 		session.setAttribute("admList", admList);
+		//钟点房价格
+		int hourRoomPrice = expenseServiceimpl.getHourRoom();
+		System.out.println("hourRoomPrice:"+hourRoomPrice);
+		request.setAttribute("hourRoomPrice", hourRoomPrice);
 		
 		//expense表格数据
 		List<Expense> expenseList = expenseServiceimpl.getAllKinds();
 		session.setAttribute("expenseList", expenseList);
 		System.out.println("expenseList:"+expenseList);
-		return "FrontManagement";
+		return "IntegratedManagement";
 	}
 	
-	//前台管理界面,这个是前台formatSex(value,row,index)函数需要的后台映射方法，为了解决管理员在改变性别时,后台数据收到
+	//综合管理界面,这个是前台formatSex(value,row,index)函数需要的后台映射方法，为了解决管理员在改变性别时,后台数据收到
 	//但改变后的数据前台界面未能及时收到的情况,用了这个方法用ajax实时接收数据
-	@RequestMapping(value="/FrontManagement",method = RequestMethod.POST,produces="text/plain;charset=UTF-8")
-	public String FrontManagementPOST(HttpSession session,HttpServletResponse response) throws IOException{
-		LOG.info("administrator/FrontManagementPOST...");
+	@RequestMapping(value="/IntegratedManagement",method = RequestMethod.POST,produces="text/plain;charset=UTF-8")
+	public String IntegratedManagementPOST(HttpSession session,HttpServletResponse response) throws IOException{
+		LOG.info("administrator/IntegratedManagementPOST...");
 		List<Administrator> admList = administratorServiceimpl.getAllAdministrator();
 		response.getWriter().print(admList);
 		System.out.println(admList);
 		return null;
 	}
 	
+	//综合管理界面,表格左边栏,对钟点房价格进行编辑
+	@RequestMapping(value="/hourRoomPrice",method = RequestMethod.POST,produces="text/plain;charset=UTF-8")
+	public String hourRoomPrice(HttpServletRequest request,HttpSession session,HttpServletResponse response) throws IOException{
+		LOG.info("administrator/hourRoomPrice...");
+		Expense expense = new Expense();
+		String hourRoomPrice = request.getParameter("hourRoomPrice");
+		int aprice = Integer.parseInt(hourRoomPrice);
+		System.out.println("aprice:"+aprice);
+		expense.setPrice(aprice);
+		
+		//更改价格
+		expenseServiceimpl.updateHourRoomPrice(expense);
+		//再重新从数据库拿数据
+		int newhourRoomPrice = expenseServiceimpl.getHourRoom();
+		//传到前台
+		response.getWriter().print(newhourRoomPrice);
+		return null;
+	}
+	
+	//综合管理界面,编辑其他消费的价格
 	@RequestMapping(value="/ResetExpense",method = RequestMethod.POST,produces="text/plain;charset=UTF-8")
 	public String ResetExpense(HttpServletRequest request,HttpSession session,HttpServletResponse response) throws IOException{
 		LOG.info("administrator/ResetExpense...");
@@ -273,33 +297,6 @@ public class AdministratorController {
 		response.getWriter().print(admList);
 		return null;
 	}
-	
-	//前台管理界面修改前台信息操作
-//	@RequestMapping(value="/ResetFrontInfo",method = RequestMethod.POST,produces = "text/plain;charset=UTF-8")
-//	public String ResetFrontInfoAuxiliary(HttpServletRequest request,HttpServletResponse response,HttpSession session) throws IOException {
-//		LOG.info("administrator/ResetFrontInfo...");
-//		Administrator thisadministrator = new Administrator();
-//		String admId = request.getParameter("admId");
-//		System.out.println(admId);
-//		String aName = request.getParameter("aName");
-//		System.out.println(aName);
-//		String aPassword = request.getParameter("aPassword");
-//		String aSex = request.getParameter("aSex");
-//		if(aSex.equals("man"))
-//			aSex="男";
-//		else if(aSex.equals("woman"))
-//			aSex="女";
-//		
-//		thisadministrator.setAdmId(admId);
-//		thisadministrator.setaName(aName);
-//		thisadministrator.setaPassword(aPassword);
-//		thisadministrator.setaSex(aSex);
-//		administratorServiceimpl.updateAdm(thisadministrator);
-//		
-//		List<Administrator> admList = administratorServiceimpl.getAllAdministrator();
-//		response.getWriter().print(admList);
-//		return null;
-//	}
 	
 	//账目详计页面
 	@RequestMapping(value="/Account",method = RequestMethod.GET,produces="text/plain;charset=UTF-8")

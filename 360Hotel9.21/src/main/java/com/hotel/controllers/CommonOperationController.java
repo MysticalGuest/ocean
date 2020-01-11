@@ -410,7 +410,6 @@ public class CommonOperationController {
         List<Map<String, Integer>> billThisYearList = billServiceimpl.getTurnoverPerQuarterThisYear();
         Map<String, Integer> profitPerQuarterThisYearList = MyClass.getExpenseForMapList(billThisYearList,priceList);
 		System.out.println("billThisYearList:"+billThisYearList);
-		System.out.println("billThisYearList:"+billThisYearList.get(0));
 		System.out.println("billThisYearListSize:"+billThisYearList.size());
 		System.out.println("profitPerQuarterThisYearList:"+profitPerQuarterThisYearList);
 		//将计算后的账单与每个季度对应起来

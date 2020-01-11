@@ -38,7 +38,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				尊品360宾馆服务平台
 			</font>
 		</div>
-			<h1>${thisadministrator.aName}正在运行平台！比公有云更多的，是精益求精的360°服务</h1>
+			<h1>${thisadministrator.aName}正在运行平台！比标准服务更多的，是精益求精的360°服务</h1>
 			<p>千锤百炼打造面向顾客的全程服务</p>
 		</div>
 		<ul class="index-tserver">
@@ -49,9 +49,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</p>
 			</li>
 			<li class="tserver-list2">
-				前台管理与其他
+				综合管理
 				<p class="animated zoomin">
-					<a href="administrator/FrontManagement">对前台信息进行管理，对其他消费的一些商品做价格调整</a>
+					<a href="administrator/IntegratedManagement">前台信息进行管理，对其他消费的一些商品和钟点房做价格调整</a>
 				</p>
 			</li>
 			<li class="tserver-list3">

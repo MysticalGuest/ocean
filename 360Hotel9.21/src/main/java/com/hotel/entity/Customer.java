@@ -13,23 +13,25 @@ public class Customer implements Serializable {
 	private String inTime;
 	private String cName;
 	private String cardID;
-	private String cSex;
+//	private String cSex;
 	private String roomNum;
 	private int chargeAndDeposit;
-	
+	private String paymentMethod;
+
 	public Customer() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Customer(String inTime,String cName, String cardID, String cSex, String roomNum,int chargeAndDeposit) {
+	public Customer(String inTime,String cName, String cardID, String roomNum,int chargeAndDeposit,String paymentMethod) {
 		super();
 		this.inTime = inTime;
 		this.cName = cName;
 		this.cardID = cardID;
-		this.cSex = cSex;
+//		this.cSex = cSex;
 		this.roomNum = roomNum;
 		this.chargeAndDeposit=chargeAndDeposit;
+		this.paymentMethod=paymentMethod;
 	}
 
 	public String getinTime() {
@@ -56,13 +58,13 @@ public class Customer implements Serializable {
 		this.cardID = cardID;
 	}
 
-	public String getcSex() {
-		return cSex;
-	}
-
-	public void setcSex(String cSex) {
-		this.cSex = cSex;
-	}
+//	public String getcSex() {
+//		return cSex;
+//	}
+//
+//	public void setcSex(String cSex) {
+//		this.cSex = cSex;
+//	}
 	
 	public String getroomNum() {
 		return roomNum;
@@ -78,6 +80,14 @@ public class Customer implements Serializable {
 
 	public void setChargeAndDeposit(int chargeAndDeposit) {
 		this.chargeAndDeposit = chargeAndDeposit;
+	}
+	
+	public String getPaymentMethod() {
+		return paymentMethod;
+	}
+
+	public void setPaymentMethod(String paymentMethod) {
+		this.paymentMethod = paymentMethod;
 	}
 
 //	@Override
@@ -100,13 +110,12 @@ public class Customer implements Serializable {
 		}
 		String inDate = myFmt.format(date);
 		
-		//如果cardID里带有英文,比如最后一位为x,直接传到前台会出错,现将其处理一下
-		if(cardID!=null&&((cardID.charAt(cardID.length()-1)=='x')||(cardID.charAt(cardID.length()-1)=='X')))
-			cardID="\""+cardID+"\"";
-		
+//		return "{\"inTime\":\""+inDate+"\",\"cName\":\""+cName+
+//				"\",\"cardID\":"+cardID+","+ "\"cSex\":"+cSex+",\"roomNum\":\""+
+//				roomNum+"\",\"chargeAndDeposit\":"+chargeAndDeposit+",\"paymentMethod\":"+paymentMethod+"}";
 		return "{\"inTime\":\""+inDate+"\",\"cName\":\""+cName+
-				"\",\"cardID\":"+cardID+","+ "\"cSex\":"+cSex+",\"roomNum\":\""+
-				roomNum+"\",\"chargeAndDeposit\":\""+chargeAndDeposit+"\"}";
+				"\",\"cardID\":"+cardID+ ",\"roomNum\":\""+
+				roomNum+"\",\"chargeAndDeposit\":"+chargeAndDeposit+",\"paymentMethod\":\""+paymentMethod+"\"}";
 	}
 
 }

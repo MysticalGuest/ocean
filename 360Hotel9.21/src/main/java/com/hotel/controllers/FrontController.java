@@ -77,24 +77,47 @@ public class FrontController {
 	
 	//打印发票界面
 	@RequestMapping(value="/Bill",method = RequestMethod.GET)
-	public String Bill(HttpSession session) throws JsonProcessingException{
+	public String Bill(HttpServletRequest request,HttpSession session) throws JsonProcessingException{
 		LOG.info("front/Bill...");
 		//房号下拉框
 		List<Apartment> apartmentList = apartmentServiceimpl.getSpareApartment();
 		session.setAttribute("apartmentList", apartmentList);
+		
+		//钟点房房价
+		int hourRoomPrice = expenseServiceimpl.getHourRoom();
+		request.setAttribute("hourRoomPrice", hourRoomPrice);
 		return "Bill";
 	}
 	
 	//发票打印后接收前台数据数据
 	@RequestMapping(value="/Bill",method = RequestMethod.POST,produces = "text/plain;charset=UTF-8")
-	public String BillPOST(Customer customer,HttpServletRequest request,HttpServletResponse response,HttpSession session) throws IOException{
+	public String BillPOST(HttpServletRequest request,HttpServletResponse response,HttpSession session) throws IOException{
 		LOG.info("front/BillPOST...");
+		Customer customer = new Customer();
 		//获取当前时间
 		Date date = new Date();
 		SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String strDate=dateFormat.format(date);
 		customer.setinTime(strDate);
 		System.out.println(strDate);
+		
+		String paymentMethod = request.getParameter("paymentMethod");
+		customer.setPaymentMethod(paymentMethod);
+		System.out.println("paymentMethod:"+paymentMethod);
+		
+		String cardID = request.getParameter("cardID");
+		
+		System.out.println("cardID:"+cardID);
+		//如果cardID里带有英文,比如最后一位为x,直接传到前台会出错,现将其处理一下
+		if(cardID==""){
+			cardID=null;
+		}
+		else{
+			if(((cardID.charAt(cardID.length()-1)=='x')||(cardID.charAt(cardID.length()-1)=='X')))
+				cardID="\""+cardID+"\"";
+		}
+		customer.setcardID(cardID);
+		System.out.println("cardID:"+cardID);
 		
 		String cName = request.getParameter("cName");
 		customer.setcName(cName);

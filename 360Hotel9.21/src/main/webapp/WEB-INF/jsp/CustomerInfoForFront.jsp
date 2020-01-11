@@ -144,13 +144,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					pageSize:10">
 				<thead>
 					<tr>
-						<!-- <th field="customerId" width="20" align="center">序号</th> -->
 						<th field="inTime" align="center">入住时间</th>
 						<th field="cName" width="40" align="center">姓名</th>
 						<th field="cardID" align="center" >身份证号</th>
-						<th field="cSex" width="20" align="center">性别</th>
 						<th field="roomNum" width="60" align="center" formatter="linefeed" >房号</th>
 						<th field="chargeAndDeposit" width="20" align="center">收款</th>
+						<th field="paymentMethod" width="25" align="center">支付方式</th>
 					</tr>
 				</thead>
 			</table>

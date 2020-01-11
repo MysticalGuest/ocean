@@ -9,11 +9,12 @@ a {
 	width: 100%;
 	height: auto;
 	margin: 50px auto;
+	text-align: center;
 }
 .index-tserver {
 	width: 100%;
 	box-sizing: border-box;
-	text-align: center;
+	
 	padding: 0 2.6%
 }
 .index-tserver li {
